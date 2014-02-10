@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ja" ng-app>
+<head>
+<meta charset="UTF-8">
+<title>Angularjs テスト</title>
+<script src="angular.min.js"></script>
+<script src="main.js"></script>
+<style>
+.even {
+background:#fcc;
+}
+.odd{
+background:#ccf;
+}
+</style>
+</head>
+<body>
+	<h1>Angularjsのテスト</h1>
+<h3>ng-model</h3>
+	<p>modelname：{{modelname}}</p>
+	<input type="text" ng-model="modelname"/>
+	<p>式：{{ 3 * 2}}</p>
+
+<h3>ng-controller</h3>	
+<div ng-controller="main">
+<p>{{users.length}} users</p>
+
+<h3>ng-repeat, ng-class-even, ng-class-odd, ng-click</h3>
+<ul>
+<li ng-repeat="user in users" ng-class-even="'even'" ng-class-odd="'odd'" ng-controller="plus">
+{{$index + 1}} {{user.name}} {{user.score}}
+<button ng-click="increment()">+1</button>
+
+
+
+</li>
+</ul>
+
+<h3>filter</h3>
+<ul>
+<li>数字(1500|number)：{{ 1500|number}}</li>
+<li>小数桁(3.14159265359|number:4)：{{ 3.14159265359|number:4}}</li>
+<li>通貨(1500|currency)：{{ 1500|currency}}</li>
+<li>円(1500|currency:'¥')：{{ 1500|currency:'¥'}}</li>
+<li>日付(today|date:'yyyy-MM-dd')：{{ today|date:'yyyy-MM-dd'}}</li>
+<li>大文字("aAbBcC"|uppercase)：{{ "aAbBcC"|uppercase}}</li>
+<li>小文字("aAbBcC"|lowercase)：{{ "aAbBcC"|lowercase}}</li>
+</ul>
+
+<h3>repeat filter limitTo:3</h3>
+<ul>
+<li ng-repeat="user in users|limitTo:3" >
+{{user.name}} {{user.score}}
+</li>
+</ul>
+
+<h3>repeat filter orderBy:'score'</h3>
+<ul>
+<li ng-repeat="user in users|orderBy:'score'" >
+{{user.name}} {{user.score}}
+</li>
+</ul>
+
+<h3>repeat filter orderBy:'-score'</h3>
+<ul>
+<li ng-repeat="user in users|orderBy:'-score'" >
+{{user.name}} {{user.score}}
+</li>
+</ul>
+
+
+<h3>repeat filter orderBy:'-score'|limitTo:3</h3>
+<ul>
+<li ng-repeat="user in users|orderBy:'-score'|limitTo:3" >
+{{user.name}} {{user.score}}
+</li>
+</ul>
+
+
+<h3>repeat filter input</h3>
+<p>入力値によってフィルタを行う</p>
+<input type="text" ng-model="query.name"/>
+<ul>
+<li ng-repeat="user in users|filter:query" >
+{{user.name}} {{user.score}}
+</li>
+</ul>
+
+
+</div>
+
+</body>
+</html>
